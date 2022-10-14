@@ -4,8 +4,8 @@ go 1.18
 
 require (
 	github.com/gballet/go-verkle v0.0.0-20220923150140-6c08cd337774
-	github.com/ledgerwatch/erigon-lib v0.0.0-20221011145732-a09e268abe14
-	github.com/ledgerwatch/erigon-snapshot v1.0.1-0.20221010023441-7e1da3031ab0
+	github.com/ledgerwatch/erigon-lib v0.0.0-20221014221137-51b120abdd73
+	github.com/ledgerwatch/erigon-snapshot v1.0.1-0.20221012092130-0962bd35abe1
 	github.com/ledgerwatch/log/v3 v3.4.2
 	github.com/ledgerwatch/secp256k1 v1.0.0
 	github.com/ledgerwatch/trackerslist v1.0.0
@@ -65,7 +65,7 @@ require (
 	github.com/stretchr/testify v1.8.0
 	github.com/tendermint/go-amino v0.14.1
 	github.com/tendermint/tendermint v0.31.12
-	github.com/torquem-ch/mdbx-go v0.26.0
+	github.com/torquem-ch/mdbx-go v0.26.1
 	github.com/ugorji/go/codec v1.1.13
 	github.com/ugorji/go/codec/codecgen v1.1.13
 	github.com/urfave/cli v1.22.9
