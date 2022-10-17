@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/c2h5oh/datasize"
+	"github.com/golang/snappy"
 	"github.com/ledgerwatch/erigon-lib/kv"
 	"github.com/ledgerwatch/erigon-lib/kv/mdbx"
 	"github.com/ledgerwatch/erigon/cmd/verkle/verkletrie"
@@ -243,23 +244,24 @@ func dump(cfg optionsCfg) error {
 		if len(k) != 32 {
 			continue
 		}
+		ev := snappy.Encode(nil, v)
 		// k is the root so it will always be 32 bytes
 		if _, err := file.Write(k); err != nil {
 			return err
 		}
 		currWritten += 32
 		// Write length of RLP encoded note
-		lenNode := make([]byte, 8)
-		binary.BigEndian.PutUint64(lenNode, uint64(len(v)))
+		lenNode := make([]byte, 4)
+		binary.BigEndian.PutUint64(lenNode, uint64(len(ev)))
 		if _, err := file.Write(lenNode); err != nil {
 			return err
 		}
-		currWritten += 8
+		currWritten += 4
 		// Write Rlp encoded node
-		if _, err := file.Write(v); err != nil {
+		if _, err := file.Write(ev); err != nil {
 			return err
 		}
-		currWritten += uint64(len(v))
+		currWritten += uint64(len(ev))
 		if currWritten > DumpSize {
 			file.Close()
 			currWritten = 0
