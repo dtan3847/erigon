@@ -252,7 +252,7 @@ func dump(cfg optionsCfg) error {
 		currWritten += 32
 		// Write length of RLP encoded note
 		lenNode := make([]byte, 4)
-		binary.BigEndian.PutUint64(lenNode, uint64(len(ev)))
+		binary.BigEndian.PutUint32(lenNode, uint32(len(ev)))
 		if _, err := file.Write(lenNode); err != nil {
 			return err
 		}
