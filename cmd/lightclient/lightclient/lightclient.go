@@ -45,7 +45,7 @@ type LightClient struct {
 }
 
 func NewLightClient(ctx context.Context, genesisConfig *clparams.GenesisConfig, beaconConfig *clparams.BeaconChainConfig,
-	execution remote.ETHBACKENDServer, sentinel lightrpc.SentinelClient) (*LightClient, error) {
+	execution remote.ETHBACKENDServer, sentinel lightrpc.SentinelClient, highestSeen uint64) (*LightClient, error) {
 	recentHashesCache, err := lru.New(maxRecentHashes)
 	return &LightClient{
 		ctx:               ctx,
@@ -55,6 +55,7 @@ func NewLightClient(ctx context.Context, genesisConfig *clparams.GenesisConfig, 
 		recentHashesCache: recentHashesCache,
 		sentinel:          sentinel,
 		execution:         execution,
+		highestSeen:       highestSeen,
 	}, err
 }
 
